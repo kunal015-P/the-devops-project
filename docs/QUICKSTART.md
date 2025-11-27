@@ -61,7 +61,7 @@ terraform plan
 terraform apply
 
 # Update kubeconfig
-aws eks update-kubeconfig --region us-west-2 --name devops-flask-cluster
+aws eks update-kubeconfig --region us-east-1 --name devops-flask-cluster
 ```
 
 #### 3. Deploy Monitoring
@@ -78,7 +78,7 @@ terraform apply
 ECR_REPO=$(cd terraform/eks && terraform output -raw ecr_repository_url)
 
 # Build and push image
-aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin ${ECR_REPO%/*}
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR_REPO%/*}
 docker build -t ${ECR_REPO}:latest .
 docker push ${ECR_REPO}:latest
 
@@ -172,12 +172,12 @@ wrk -t12 -c400 -d30s http://localhost:5000/
 
 1. **EKS Cluster Access:**
    ```bash
-   aws eks update-kubeconfig --region us-west-2 --name devops-flask-cluster
+   aws eks update-kubeconfig --region us-east-1 --name devops-flask-cluster
    ```
 
 2. **ECR Authentication:**
    ```bash
-   aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin <account-id>.dkr.ecr.us-west-2.amazonaws.com
+   aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <account-id>.dkr.ecr.us-east-1.amazonaws.com
    ```
 
 3. **Jenkins SSH Access:**

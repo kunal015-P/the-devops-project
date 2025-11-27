@@ -16,12 +16,11 @@ terraform {
     }
   }
   
-  backend "s3" {
-    # Configure your S3 backend
-    # bucket = "your-terraform-state-bucket"
-    # key    = "eks/terraform.tfstate"
-    # region = "us-west-2"
-  }
+  # backend "s3" {
+  #   bucket = "mybucket98600676575-us-east-1"
+  #   key    = "monitoring/terraform.tfstate"
+  #   region = "us-east-1"
+  # }
 }
 
 provider "aws" {
@@ -32,18 +31,18 @@ provider "aws" {
       Environment = var.environment
       Project     = var.project_name
       ManagedBy   = "Terraform"
+      Component   = "Monitoring"
     }
   }
 }
 
+# Get EKS cluster data
 data "aws_eks_cluster" "cluster" {
-  name = module.eks.cluster_name
-  depends_on = [module.eks]
+  name = var.cluster_name
 }
 
 data "aws_eks_cluster_auth" "cluster" {
-  name = module.eks.cluster_name
-  depends_on = [module.eks]
+  name = var.cluster_name
 }
 
 provider "kubernetes" {

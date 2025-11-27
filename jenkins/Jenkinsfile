@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        AWS_DEFAULT_REGION = 'us-west-2'
+        AWS_DEFAULT_REGION = 'us-east-1'
         ECR_REPOSITORY = '${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/devops-flask-app-flask-app'
         KUBECONFIG = '/var/lib/jenkins/.kube/config'
         IMAGE_TAG = "${BUILD_NUMBER}"

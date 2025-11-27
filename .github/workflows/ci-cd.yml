@@ -19,7 +19,7 @@ on:
           - production
 
 env:
-  AWS_REGION: us-west-2
+  AWS_REGION: us-east-1
   ECR_REPOSITORY: devops-flask-app-flask-app
   EKS_CLUSTER_NAME: devops-flask-cluster
 
