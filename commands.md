@@ -1,71 +1,79 @@
 ```
-cd terraform 
-cd eks 
-terraform init -upgrade 
+// clone repo on project folder
+//open in vs code 
+
+https://github.com/atulkamble/the-devops-project
+
+// prerequisites 
+git, docker, k8s, aws cli, python 
+
+// manually run 
+
+cd app/
+python app.py 
+
+http://localhost:5000
+
+// run with docker 
+
+sudo docker build -t docker.iousername/the-devops-project
+sudo docker run -d -p docker.io/username/the-devops-project
+
+// run with eks 
+
+// create cluster 
+
+// on mac
+
+eksctl create cluster \
+  --name mycluster \
+  --region us-east-1 \
+  --nodegroup-name mynodes \
+  --node-type t3.medium \
+  --nodes 2 \
+  --nodes-min 2 \
+  --nodes-max 2 \
+  --managed
+
+eksctl delete cluster --name mycluster --region us-east-1
+
+//on windows 
+
+eksctl create cluster --name mycluster --region us-east-1 --nodegroup-name mynodes --node-type t3.medium --nodes 2 --nodes-min 2 --nodes-max 2 --managed
+
+// copy your docker image url to deployment.yaml 
+
+example: docker.iousername/the-devops-project
+
+kubectl apply -f namespace.yaml
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml 
+
+kubectl get all 
+
+kubectl get nodes 
+kubectl get services 
+kubectl get pods 
+
+kunectl get service  flask-app-service
+
+// copy service url and paste in browser 
+
+load-balancer-url
+
+// on minikube 
 
 
+minikube start driver=docker
+kubectl apply -f namespace.yaml
+kubectl apply -f deployment.yaml
+kubectl apply -f service-minikube.yaml 
 
-// create bucket 
-
-aws s3 mb s3://mybucket98600676575 --region us-east-1
-
-aws s3 mb s3://mybucket98600676575-us-east-1 --region us-east-1
-
-// ecr 
-
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 535002879962.dkr.ecr.us-east-1.amazonaws.com
-
-docker build -t cloudnautic/atulkamble .
-
-docker tag cloudnautic/atulkamble:latest 535002879962.dkr.ecr.us-east-1.amazonaws.com/cloudnautic/atulkamble:latest
-
-docker push 535002879962.dkr.ecr.us-east-1.amazonaws.com/cloudnautic/atulkamble:latest
-
-// repo URL 
-
-535002879962.dkr.ecr.us-east-1.amazonaws.com/cloudnautic/atulkamble:latest
-
-// scripts - create eks cluster 
-
-
-chmod +x ./create-cluster.sh
-./create-cluster.sh
-
-
-// jenkins 
-
-plugins - docker, docker pipeline, aws credentials, blue ocean 
-
-tools - myDocker, myMaven 
-
-
-eksctl get cluster
-aws eks list-clusters --region us-east-1
-aws sts get-caller-identity
-
-aws eks update-kubeconfig --region us-east-1 --name mycluster
-
-kubectl get nodes
-
-aws eks list-nodegroups --cluster-name m
-ycluster --region us-east-1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+minikube tunnel (keep running)
+minikube stop 
+minikube delete 
 ```
+
+
+
+
