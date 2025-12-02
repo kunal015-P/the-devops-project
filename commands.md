@@ -16,8 +16,9 @@ http://localhost:5000
 
 // run with docker 
 
-sudo docker build -t docker.iousername/the-devops-project
-sudo docker run -d -p docker.io/username/the-devops-project
+cd ..
+sudo docker build -t docker.io/username/the-devops-project .
+sudo docker run -d -p 5000:5000 docker.io/username/the-devops-project
 
 // run with eks 
 
@@ -43,7 +44,7 @@ eksctl create cluster --name mycluster --region us-east-1 --nodegroup-name mynod
 
 // copy your docker image url to deployment.yaml 
 
-example: docker.iousername/the-devops-project
+example: docker.io/username/the-devops-project
 
 kubectl apply -f namespace.yaml
 kubectl apply -f deployment.yaml
@@ -72,8 +73,10 @@ kubectl apply -f service-minikube.yaml
 minikube tunnel (keep running)
 minikube stop 
 minikube delete 
+
+
+
+
+
+
 ```
-
-
-
-
